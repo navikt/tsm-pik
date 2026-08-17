@@ -28,7 +28,7 @@ docker build -t tsm-pik .
 
 #### Running a docker image
 ``` bash
-docker run --rm -it -p 8080:8080 tsm-pik
+docker run --rm -it -p 8080:8080 tsm-pik app.jar -config=application-local.conf
 ```
 
 ### Upgrading the Gradle wrapper
