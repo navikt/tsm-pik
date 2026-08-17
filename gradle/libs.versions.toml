@@ -1,0 +1,24 @@
+[versions]
+kotlin = "2.4.10"
+logback = "1.6.1"
+logbackEncoder = "9.0"
+spotless = "8.9.0"
+jackson = "3.1.1"
+detekt = "2.0.0-alpha.6"
+
+
+[libraries]
+# Monitoring and observability
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logbackEncoder" }
+
+# Testing
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+
+# Transitive Vulnerabilities
+jackson-core = { module = "tools.jackson.core:jackson-core", version.ref = "jackson" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+detekt = { id = "dev.detekt",  version.ref = "detekt" }
