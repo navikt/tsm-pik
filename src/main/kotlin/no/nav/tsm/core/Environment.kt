@@ -11,10 +11,6 @@ class Environment(val runtime: Runtime)
 fun initializeEnvironment(config: ApplicationConfig): Environment {
 
     return Environment(
-        runtime =
-            Runtime(
-                env = getRuntimeCluster(),
-                name = config.property("app.name").getString(),
-            )
+        runtime = Runtime(env = getRuntimeCluster(), name = config.property("app.name").getString())
     )
 }

@@ -5,6 +5,7 @@ logbackEncoder = "9.0"
 spotless = "8.9.0"
 jackson = "3.2.2"
 detekt = "2.0.0-alpha.6"
+ktfmt = "0.62"
 
 
 [libraries]

@@ -1,5 +1,4 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import dev.detekt.gradle.Detekt
 
 group = "no.nav.tsm"
@@ -30,12 +29,15 @@ dependencies {
     implementation(libs.logback.encoder)
     constraints {
         implementation(libs.jackson.core) {
-            because("Vulnerability CVE-2026-29062")
+            because("Vulnerability CVE-2026-29062 from libs.logback.encoder")
         }
     }
 
     // Test
     testImplementation(libs.kotlin.test.junit)
+    testImplementation(ktorLibs.server.testHost)
+    testImplementation(ktorLibs.serialization.jackson3)
+    testImplementation(ktorLibs.client.contentNegotiation)
 
 }
 
@@ -53,52 +55,34 @@ tasks {
     }
 
     configure<SpotlessExtension> {
-        kotlin { ktfmt("0.62").kotlinlangStyle() }
+        val ktfmtVersion: String = libs.versions.ktfmt.get()
+        kotlin { ktfmt(ktfmtVersion).kotlinlangStyle() }
         check {
             dependsOn("spotlessApply")
         }
     }
-    named<DependencyUpdatesTask>("dependencyUpdates") {
-        fun String.isNonStable(): Boolean {
-            val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { uppercase().contains(it) }
-            val regex = "^[0-9,.v-]+(-r)?$".toRegex()
-            val isStable = stableKeyword || regex.matches(this)
-            return isStable.not()
-        }
 
-        rejectVersionIf {
-            candidate.version.isNonStable()
-        }
+    register<JavaExec>("runLocal") {
+        description = "Running application locally"
+        group = "application"
+        mainClass.set("io.ktor.server.netty.EngineMain")
+        classpath = sourceSets["main"].runtimeClasspath
+
+        args("-config=application-local.conf")
+        jvmArgs("-Dio.ktor.development=true", "-Dlogback.configurationFile=logback-local.xml")
+
+
+    }
+
+    withType<Detekt>().configureEach {
+        config.setFrom(file("detekt.yml"))
+        buildUponDefaultConfig = true
+
+        dependsOn("spotlessApply")
     }
 
 }
 
-tasks.register<Exec>("preRunLocal") {
-    group = "application"
-    commandLine("./scripts/pre-dev.sh")
-}
-
-tasks.register<JavaExec>("runLocal") {
-    group = "application"
-    mainClass.set("io.ktor.server.netty.EngineMain")
-    classpath = sourceSets["main"].runtimeClasspath
-
-    args("-config=application-local.conf")
-    jvmArgs("-Dio.ktor.development=true", "-Dlogback.configurationFile=logback-local.xml")
-
-    dependsOn("preRunLocal")
-}
-
-tasks.withType<Detekt>().configureEach {
-    config.setFrom(file("detekt.yml"))
-    buildUponDefaultConfig = true
-
-    dependsOn("spotlessApply")
-}
-
-/**
- * Disable auto running of detekt on build and stuff
- */
 afterEvaluate {
     tasks.named("check") {
         setDependsOn(dependsOn.filter { !it.toString().contains("detekt") })

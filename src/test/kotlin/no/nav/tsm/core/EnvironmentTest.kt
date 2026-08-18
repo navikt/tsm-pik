@@ -11,11 +11,11 @@ class EnvironmentTest {
         val applicationConfig =
             HoconApplicationConfig(
                 ConfigFactory.parseMap(
-                    mapOf(
-                        "NAIS_POD_NAME" to "tsm-pik-prod-123",
-                        "NAIS_CLUSTER_NAME" to "prod-gcp",
+                        mapOf(
+                            "NAIS_POD_NAME" to "tsm-pik-prod-123",
+                            "NAIS_CLUSTER_NAME" to "prod-gcp",
+                        )
                     )
-                )
                     .withFallback(ConfigFactory.parseResources("application.conf"))
                     .resolve()
             )
@@ -23,6 +23,5 @@ class EnvironmentTest {
         val environment = initializeEnvironment(applicationConfig)
 
         assertEquals("tsm-pik-prod-123", environment.runtime.name)
-
     }
 }
