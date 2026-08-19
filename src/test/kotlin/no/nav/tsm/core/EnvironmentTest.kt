@@ -23,5 +23,6 @@ class EnvironmentTest {
         val environment = initializeEnvironment(applicationConfig)
 
         assertEquals("tsm-pik-prod-123", environment.runtime.name)
+        assertEquals("LOCAL", environment.runtime.env.name)
     }
 }
