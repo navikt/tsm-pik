@@ -7,31 +7,44 @@ Appliaction to synchronize legal assessments from treatment outcomes (paragraf i
 * Gradle
 
 
-#### Requirements
+## Requirements
 * JDK 25
 
-## Getting started
+Make sure you have the Java JDK 25 installed
+  You can check which version you have installed using this command:
+``` bash
+java -version
+```
+
 ### Building the application
-#### Compile and package application
-To build locally and run the integration tests you can simply run
+To build the application locally and run tests you can simply run
 ``` bash
 ./gradlew clean build
  ```
-or  on windows
-`gradlew.bat clean build`
 
-#### Creating a docker image
+## Running the application
+### 1. Docker
 Creating a docker image should be as simple as
 ``` bash
 docker build -t tsm-pik .
 ```
 
-#### Running a docker image
+Running the docker image
 ``` bash
 docker run --rm -it -p 8080:8080 tsm-pik app.jar -config=application-local.conf
 ```
 
-### Upgrading the Gradle wrapper
+### 2. A Gradle task
+``` bash
+./gradlew runLocal
+```
+
+### Finding new available dependencies
+``` bash
+./gradlew dependencyUpdates
+```
+
+### Upgrading the Gradle wrapper version
 Find the newest version of Gradle here: https://gradle.org/releases/ Then run this command:
 
 ``` bash
