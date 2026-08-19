@@ -1,4 +1,5 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import dev.detekt.gradle.Detekt
 
 group = "no.nav.tsm"
@@ -19,7 +20,6 @@ dependencies {
     // Ktor
     implementation(ktorLibs.server.core)
     implementation(ktorLibs.server.netty)
-
 
     // TSM libraries
     implementation(tsmKtorLibs.core)
@@ -42,7 +42,7 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(25)
+    jvmToolchain(libs.versions.jvmVersion.get().toInt())
 }
 
 tasks {
@@ -55,8 +55,7 @@ tasks {
     }
 
     configure<SpotlessExtension> {
-        val ktfmtVersion: String = libs.versions.ktfmt.get()
-        kotlin { ktfmt(ktfmtVersion).kotlinlangStyle() }
+        kotlin { ktfmt(libs.versions.ktfmt.get()).kotlinlangStyle() }
         check {
             dependsOn("spotlessApply")
         }
@@ -79,6 +78,19 @@ tasks {
         buildUponDefaultConfig = true
 
         dependsOn("spotlessApply")
+    }
+
+    named<DependencyUpdatesTask>("dependencyUpdates") {
+        fun String.isNonStable(): Boolean {
+            val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { uppercase().contains(it) }
+            val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+            val isStable = stableKeyword || regex.matches(this)
+            return isStable.not()
+        }
+
+        rejectVersionIf {
+            candidate.version.isNonStable()
+        }
     }
 
 }
