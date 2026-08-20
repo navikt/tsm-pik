@@ -4,7 +4,6 @@ import no.nav.tsm.ktor.logger
 import no.nav.tsm.modules.etterlevelse.mapper.tilJuridiskVurderingKafkaMessage
 import no.nav.tsm.modules.etterlevelse.service.EtterlevelseProducerService
 import no.nav.tsm.modules.pik.model.JuridiskHenvisningRecord
-import kotlin.math.log
 
 class PikConsumerService(val etterlevelseProducerService: EtterlevelseProducerService) {
     private val logger = logger()
