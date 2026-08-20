@@ -28,7 +28,7 @@ private fun Application.configureConsumer() {
         consume<JuridiskHenvisningRecord>(
             name = "tsm.pik",
             onTombstone = { meta ->
-                log.info("Mottok en JuridiskHenvisning tombstone for ID ${meta.key}, hopper over")
+                log.info("Received a JuridiskHenvisning tombstone for ID ${meta.key}, skips")
             },
             onRecord = { record -> pikConsumerService.handleRecord(record) },
         )
