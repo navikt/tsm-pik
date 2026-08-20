@@ -7,20 +7,17 @@ jackson = "3.2.2"
 detekt = "2.0.0-alpha.6"
 ktfmt = "0.62"
 tsm-regula = "56"
-kafka = "4.3.0"
 jvmVersion = "25"
 
 
 [libraries]
-# Kafka
-kafka-client = { module = "org.apache.kafka:kafka-clients", version.ref = "kafka" }
 
 # Monitoring and observability
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logbackEncoder" }
 
 # Tsm dependencies
-tsm-regula = { module = "no.nav.tsm.regulus:regula", version.ref = "tsm-regula" }
+tsm-regula = { module = "no.nav.tsm.regulus:juridisk", version.ref = "tsm-regula" }
 
 # Testing
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
