@@ -16,7 +16,7 @@ class EtterlevelseProducerService(
                 juridiskVurderingKafkaMessage,
             )
             logger.info(
-                "Message sendt to kafka id ${juridiskVurderingKafkaMessage.id}, sporing ${juridiskVurderingKafkaMessage.sporing}"
+                "Message juridiskVurdering sendt to kafka id ${juridiskVurderingKafkaMessage.id}, sporing ${juridiskVurderingKafkaMessage.sporing}"
             )
         } catch (ex: Exception) {
             logger.error(
