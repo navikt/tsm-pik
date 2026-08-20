@@ -21,8 +21,15 @@ dependencies {
     implementation(ktorLibs.server.core)
     implementation(ktorLibs.server.netty)
 
+    // Kafa
+    implementation(libs.kafka.client)
+
+
     // TSM libraries
     implementation(tsmKtorLibs.core)
+    implementation(tsmKtorLibs.kafka)
+    implementation(libs.tsm.regula)
+
 
     // Monitoring and logging
     implementation(libs.logback.classic)

@@ -20,7 +20,8 @@ spec:
     requests:
       cpu: 30m
       memory: 512Mi
-
+  kafka:
+    pool: nav-prod
   liveness:
     path: /internal/health/alive
   readiness:

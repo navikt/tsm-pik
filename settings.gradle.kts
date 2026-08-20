@@ -9,6 +9,7 @@ dependencyResolutionManagement {
         maven("https://github-package-registry-mirror.gc.nav.no/cached/maven-release") {
             content {
                 includeGroup("no.nav.tsm")
+                includeGroup("no.nav.tsm.regulus")
             }
         }
         maven("https://jitpack.io") {
@@ -18,6 +19,7 @@ dependencyResolutionManagement {
         }
         mavenCentral {
             content {
+                excludeGroup("no.nav.tsm.regulus")
                 excludeGroup("no.nav.tsm")
                 excludeGroup("dev.hayden")
             }
