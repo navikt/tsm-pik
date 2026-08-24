@@ -1,17 +1,17 @@
 package no.nav.tsm.modules.etterlevelse.mapper
 
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
+import java.util.UUID
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import no.nav.tsm.modules.etterlevelse.model.JuridiskVurderingResult
 import no.nav.tsm.modules.etterlevelse.model.Utfall
 import no.nav.tsm.regulus.regula.juridisk.JuridiskHenvisning
 import no.nav.tsm.regulus.regula.juridisk.JuridiskHenvisningLovverk
 import no.nav.tsm.regulus.regula.juridisk.JuridiskUtfall
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-import java.time.ZonedDateTime
-import java.util.UUID
 import no.nav.tsm.regulus.regula.juridisk.JuridiskVurdering
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class JuridiskVurderingMapperTest {
 
@@ -58,7 +58,10 @@ class JuridiskVurderingMapperTest {
         assertEquals("syfosmregler", juridiskVurderingKafkaMessage.kilde)
         assertEquals("imagenavn", juridiskVurderingKafkaMessage.versjonAvKode)
         assertEquals("12345678910", juridiskVurderingKafkaMessage.fodselsnummer)
-        assertEquals(mapOf("sykmeldingId" to listOf(sykmeldingId)), juridiskVurderingKafkaMessage.sporing)
+        assertEquals(
+            mapOf("sykmeldingId" to listOf(sykmeldingId)),
+            juridiskVurderingKafkaMessage.sporing,
+        )
         assertEquals("folketrygdloven", juridiskVurderingKafkaMessage.lovverk)
         assertEquals("2022-01-01", juridiskVurderingKafkaMessage.lovverksversjon)
         assertEquals("§8-1", juridiskVurderingKafkaMessage.paragraf)
@@ -68,6 +71,5 @@ class JuridiskVurderingMapperTest {
         assertEquals(mapOf("input" to "verdi"), juridiskVurderingKafkaMessage.input)
         assertEquals(null, juridiskVurderingKafkaMessage.output)
         assertEquals(Utfall.VILKAR_OPPFYLT, juridiskVurderingKafkaMessage.utfall)
-
     }
 }

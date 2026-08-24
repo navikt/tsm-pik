@@ -43,6 +43,9 @@ dependencies {
     testImplementation(ktorLibs.serialization.jackson3)
     testImplementation(ktorLibs.client.contentNegotiation)
     testImplementation(libs.json.schema.validator)
+    testImplementation(libs.mockk)
+
+    testImplementation(tsmKtorLibs.kafka.test)
 
 }
 

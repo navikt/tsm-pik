@@ -9,6 +9,7 @@ ktfmt = "0.62"
 tsm-regula = "56"
 jvmVersion = "25"
 jsonSchemaValidator = "3.0.7"
+mockk = "1.14.11"
 
 
 [libraries]
@@ -23,6 +24,7 @@ tsm-regula = { module = "no.nav.tsm.regulus:juridisk", version.ref = "tsm-regula
 # Testing
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 json-schema-validator = { module = "com.networknt:json-schema-validator", version.ref = "jsonSchemaValidator"}
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 
 # Transitive Vulnerabilities

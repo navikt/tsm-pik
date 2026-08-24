@@ -1,5 +1,10 @@
 package no.nav.tsm.modules.etterlevelse.mapper
 
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
+import java.util.UUID
+import kotlin.test.Test
 import no.nav.tsm.modules.etterlevelse.model.JuridiskVurderingResult
 import no.nav.tsm.regulus.regula.juridisk.JuridiskHenvisning
 import no.nav.tsm.regulus.regula.juridisk.JuridiskHenvisningLovverk
@@ -9,18 +14,13 @@ import tools.jackson.databind.DeserializationFeature
 import tools.jackson.databind.cfg.DateTimeFeature
 import tools.jackson.databind.json.JsonMapper
 import tools.jackson.module.kotlin.kotlinModule
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-import java.time.ZonedDateTime
-import java.util.UUID
-import kotlin.test.Test
 
 class JuridiskVurderingSchemaTest {
 
     @Test
     fun `check that juridiskVurderingSchema is valid`() {
 
-        val objectMapper =
+        val mapper =
             JsonMapper.builder()
                 .addModule(kotlinModule())
                 .configure(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS, false)
@@ -45,12 +45,12 @@ class JuridiskVurderingSchemaTest {
                                 paragraf = "8-1",
                                 ledd = 1,
                                 punktum = 1,
-                                bokstav = "a"
+                                bokstav = "a",
                             ),
                         sporing = mapOf("sykmelding" to sykmeldingId),
                         input = mapOf("input" to "verdi"),
                         utfall = JuridiskUtfall.VILKAR_OPPFYLT,
-                        tidsstempel = ZonedDateTime.now(ZoneOffset.UTC)
+                        tidsstempel = ZonedDateTime.now(ZoneOffset.UTC),
                     )
                 )
             )
@@ -60,7 +60,7 @@ class JuridiskVurderingSchemaTest {
             juridiskVurderingResult.juridiskeVurderinger
                 .first()
                 .tilJuridiskVurderingKafkaMessage(tidsstempel)
-        val kafkaMessage = objectMapper.writeValueAsString(juridiskVurderingKafkaMessage)
+        val kafkaMessage = mapper.writeValueAsString(juridiskVurderingKafkaMessage)
 
         SchemaAssertions.assertSchema(kafkaMessage)
     }
