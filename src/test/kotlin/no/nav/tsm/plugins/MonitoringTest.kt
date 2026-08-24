@@ -6,7 +6,7 @@ import io.ktor.serialization.jackson3.jackson
 import io.ktor.server.testing.ApplicationTestBuilder
 import io.ktor.server.testing.testApplication
 import kotlin.test.assertEquals
-import org.junit.Test
+import kotlin.test.Test
 
 class MonitoringTest {
 

@@ -9,7 +9,9 @@ class PikConsumerService(val etterlevelseProducerService: EtterlevelseProducerSe
     private val logger = logger()
 
     fun handleRecord(record: JuridiskHenvisningRecord) {
-        logger.info("Processing JuridiskHenvisningRecord, contains ${record.juridiskeVurderinger.size} juridiskVurderinger")
+        logger.info(
+            "Processing JuridiskHenvisningRecord, contains ${record.juridiskeVurderinger.size} juridiskVurderinger"
+        )
 
         record.juridiskeVurderinger.forEach { juridiskVurdering ->
             etterlevelseProducerService.sendToKafka(

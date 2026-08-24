@@ -42,6 +42,7 @@ dependencies {
     testImplementation(ktorLibs.server.testHost)
     testImplementation(ktorLibs.serialization.jackson3)
     testImplementation(ktorLibs.client.contentNegotiation)
+    testImplementation(libs.json.schema.validator)
 
 }
 
