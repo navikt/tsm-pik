@@ -23,7 +23,7 @@ dependencies {
 
     implementation(tsmKtorLibs.core)
     implementation(tsmKtorLibs.kafka)
-    implementation(libs.tsm.regula)
+    implementation(libs.tsm.juridisk)
 
 
     implementation(libs.logback.classic)

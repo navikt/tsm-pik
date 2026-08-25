@@ -6,7 +6,7 @@ spotless = "8.10.0"
 jackson = "3.2.2"
 detekt = "2.0.0-alpha.6"
 ktfmt = "0.62"
-tsm-regula = "56"
+tsm-juridisk = "56"
 jvmVersion = "25"
 jsonSchemaValidator = "3.0.7"
 mockk = "1.14.11"
@@ -19,7 +19,7 @@ logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "lo
 logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logbackEncoder" }
 
 # Tsm dependencies
-tsm-regula = { module = "no.nav.tsm.regulus:juridisk", version.ref = "tsm-regula" }
+tsm-juridisk = { module = "no.nav.tsm.regulus:juridisk", version.ref = "tsm-juridisk" }
 
 # Testing
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
