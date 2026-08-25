@@ -17,14 +17,15 @@ application {
 }
 
 dependencies {
-    // Ktor
     implementation(ktorLibs.server.core)
     implementation(ktorLibs.server.netty)
 
-    // TSM libraries
-    implementation(tsmKtorLibs.core)
 
-    // Monitoring and logging
+    implementation(tsmKtorLibs.core)
+    implementation(tsmKtorLibs.kafka)
+    implementation(libs.tsm.regula)
+
+
     implementation(libs.logback.classic)
     implementation(libs.logback.encoder)
     constraints {
@@ -33,11 +34,13 @@ dependencies {
         }
     }
 
-    // Test
     testImplementation(libs.kotlin.test.junit)
     testImplementation(ktorLibs.server.testHost)
     testImplementation(ktorLibs.serialization.jackson3)
     testImplementation(ktorLibs.client.contentNegotiation)
+    testImplementation(libs.json.schema.validator)
+    testImplementation(libs.mockk)
+    testImplementation(tsmKtorLibs.kafka.test)
 
 }
 
@@ -61,6 +64,11 @@ tasks {
         }
     }
 
+    register<Exec>("preRunLocal") {
+        group = "application"
+        commandLine("./scripts/pre-dev.sh")
+    }
+
     register<JavaExec>("runLocal") {
         description = "Running application locally"
         group = "application"
@@ -70,6 +78,7 @@ tasks {
         args("-config=application-local.conf")
         jvmArgs("-Dio.ktor.development=true", "-Dlogback.configurationFile=logback-local.xml")
 
+        dependsOn("preRunLocal")
 
     }
 

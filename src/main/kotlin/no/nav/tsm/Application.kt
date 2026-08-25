@@ -1,6 +1,8 @@
 package no.nav.tsm
 
 import io.ktor.server.application.*
+import no.nav.tsm.modules.etterlevelse.configureEtterlevelse
+import no.nav.tsm.modules.pik.configurePik
 import no.nav.tsm.plugins.*
 
 fun main(args: Array<String>) {
@@ -8,10 +10,9 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    // Global configuration
     configureDependencies()
     configureMonitoring()
 
-    // Specific modules
-    // configureKafkaModule()
+    configurePik()
+    configureEtterlevelse()
 }

@@ -11,8 +11,8 @@
 
     <logger name="no.nav.tsm" level="DEBUG"/>
 
-    <!-- Stuff we wanna squelch, use sparingly -->
     <logger name="ch.qos.logback" level="WARN"/>
+    <logger name="org.apache.kafka" level="WARN"/>
 
     <!-- Local development, redirect secure logs to console with nice colors -->
     <appender name="TEAM_LOG" class="ch.qos.logback.core.ConsoleAppender">

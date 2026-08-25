@@ -6,16 +6,26 @@ spotless = "8.10.0"
 jackson = "3.2.2"
 detekt = "2.0.0-alpha.6"
 ktfmt = "0.62"
+tsm-regula = "56"
 jvmVersion = "25"
+jsonSchemaValidator = "3.0.7"
+mockk = "1.14.11"
 
 
 [libraries]
+
 # Monitoring and observability
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logbackEncoder" }
 
+# Tsm dependencies
+tsm-regula = { module = "no.nav.tsm.regulus:juridisk", version.ref = "tsm-regula" }
+
 # Testing
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+json-schema-validator = { module = "com.networknt:json-schema-validator", version.ref = "jsonSchemaValidator"}
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+
 
 # Transitive Vulnerabilities
 jackson-core = { module = "tools.jackson.core:jackson-core", version.ref = "jackson" }

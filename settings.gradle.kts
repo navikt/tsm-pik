@@ -2,13 +2,14 @@ rootProject.name = "tsm-pik"
 
 
 val ktorVersion = "3.5.2"
-val tsmKtorVersion = "1.2.10"
+val tsmKtorVersion = "1.2.12"
 
 dependencyResolutionManagement {
     repositories {
         maven("https://github-package-registry-mirror.gc.nav.no/cached/maven-release") {
             content {
                 includeGroup("no.nav.tsm")
+                includeGroup("no.nav.tsm.regulus")
             }
         }
         maven("https://jitpack.io") {
@@ -18,6 +19,7 @@ dependencyResolutionManagement {
         }
         mavenCentral {
             content {
+                excludeGroup("no.nav.tsm.regulus")
                 excludeGroup("no.nav.tsm")
                 excludeGroup("dev.hayden")
             }
