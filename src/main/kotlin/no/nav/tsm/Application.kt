@@ -10,11 +10,9 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    // Global configuration
     configureDependencies()
     configureMonitoring()
 
-    // Specific modules
     configurePik()
     configureEtterlevelse()
 }

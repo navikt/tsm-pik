@@ -6,6 +6,9 @@ import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.util.UUID
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.toJavaDuration
 import no.nav.tsm.ktor.kafka.test.KafkaContainer
 import no.nav.tsm.ktor.kafka.test.send
 import no.nav.tsm.modules.etterlevelse.model.JuridiskVurderingKafkaMessage
@@ -18,13 +21,10 @@ import no.nav.tsm.utils.configureFullIntegrationTests
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.clients.producer.KafkaProducer
-import tools.jackson.module.kotlin.jacksonObjectMapper
 import org.apache.kafka.common.serialization.ByteArrayDeserializer
 import org.apache.kafka.common.serialization.StringDeserializer
+import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
-import kotlin.test.assertEquals
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.toJavaDuration
 
 const val PIK_TOPIC = "tsm.pik"
 const val ETTERLEVELSE_TOPIC = "flex.omrade-helse-etterlevelse"
@@ -43,10 +43,12 @@ class IntegrationTest {
     }
 
     private fun consumeFromEtterlevelseTopic(): ByteArray {
-        val config = kafka.config + mapOf(
-            ConsumerConfig.AUTO_OFFSET_RESET_CONFIG to "earliest",
-            ConsumerConfig.GROUP_ID_CONFIG to "tsm",
-        )
+        val config =
+            kafka.config +
+                mapOf(
+                    ConsumerConfig.AUTO_OFFSET_RESET_CONFIG to "earliest",
+                    ConsumerConfig.GROUP_ID_CONFIG to "tsm",
+                )
 
         val consumer = KafkaConsumer(config, StringDeserializer(), ByteArrayDeserializer())
         consumer.subscribe(listOf(ETTERLEVELSE_TOPIC))
@@ -55,7 +57,6 @@ class IntegrationTest {
             if (!records.isEmpty) {
                 return records.first().value()
             }
-
         }
     }
 
@@ -120,6 +121,5 @@ class IntegrationTest {
             mapper.readValue<JuridiskVurderingKafkaMessage>(consumeFromEtterlevelseTopic())
 
         assertEquals("1.0.0", juridiskVurderingKafkaMessage.versjon)
-
     }
 }

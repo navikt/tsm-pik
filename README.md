@@ -7,13 +7,27 @@ Appliaction to synchronize legal assessments from treatment outcomes (paragraf i
 * Gradle
 
 
-## Requirements
+## Requirements for develpoing the application
 * JDK 25
+* Docker
+* Docker Compose
 
 Make sure you have the Java JDK 25 installed
   You can check which version you have installed using this command:
 ``` bash
 java -version
+```
+
+Make sure you have docker installed using this command:
+You can check which version you have installed using this command:
+``` bash
+docker --version
+```
+
+Make sure you have docker compose installed using this command:
+You can check which version you have installed using this command:
+``` bash
+docker compose version
 ```
 
 ### Building the application
@@ -22,33 +36,34 @@ To build the application locally and run tests you can simply run
 ./gradlew clean build
  ```
 
-## Running the application
-### 1. Docker
-Creating a docker image should be as simple as
-``` bash
-docker build -t tsm-pik .
-```
+### Running the application locally
+Run in development to enable hot reloading and stubbed external dependencies:
 
-Running the docker image
-``` bash
-docker run --rm -it -p 8080:8080 tsm-pik app.jar -config=application-local.conf
-```
+With Gradle :
 
-### 2. A Gradle task
 ``` bash
 ./gradlew runLocal
 ```
+
+In IntelliJ:
+
+There is a run configuration checked into the repository using modern IntelliJ `.run` folder. You should already
+have a runnable run-configuration in IntelliJ.
+
+If not you can refer to the manually configure it:
+
+In IntelliJ run configuration, first run the main function, then edit it to add `-Dio.ktor.development=true` to the VM
+options, and `-config=application-local.conf` in "program options".
+
 
 ### Finding new available dependencies
 ``` bash
 ./gradlew dependencyUpdates
 ```
 
-### Upgrading the Gradle wrapper version
-Find the newest version of Gradle here: https://gradle.org/releases/ Then run this command:
-
+### Upgrading the Gradle wrapper version to latest
 ``` bash
-./gradlew wrapper --gradle-version $gradleVersjon
+./gradlew :wrapper --gradle-version latest
 ```
 
 ### Contact
