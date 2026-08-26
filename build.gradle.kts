@@ -41,6 +41,8 @@ dependencies {
     testImplementation(libs.json.schema.validator)
     testImplementation(libs.mockk)
     testImplementation(tsmKtorLibs.kafka.test)
+    testImplementation(libs.kotest)
+
 
 }
 

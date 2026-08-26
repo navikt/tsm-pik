@@ -1,5 +1,6 @@
 package no.nav.tsm.modules.etterlevelse.service
 
+import io.kotest.matchers.equals.shouldBeEqual
 import io.mockk.coVerify
 import io.mockk.mockk
 import java.time.OffsetDateTime
@@ -12,6 +13,7 @@ import no.nav.tsm.modules.etterlevelse.model.Utfall
 class EtterlevelseProducerServiceTest {
     val juridiskVurderingProducer =
         mockk<KafkaRecordProducer<JuridiskVurderingKafkaMessage>>(relaxed = true)
+
     private val etterlevelseProducerService =
         EtterlevelseProducerService(juridiskVurderingProducer = juridiskVurderingProducer)
 
@@ -38,7 +40,9 @@ class EtterlevelseProducerServiceTest {
                 utfall = Utfall.VILKAR_OPPFYLT,
             )
 
-        etterlevelseProducerService.sendToKafka(juridiskVurderingKafkaMessage)
+        val sendToKafka = etterlevelseProducerService.sendToKafka(juridiskVurderingKafkaMessage)
+
+        sendToKafka shouldBeEqual Unit
 
         coVerify(exactly = 1) {
             juridiskVurderingProducer.send(

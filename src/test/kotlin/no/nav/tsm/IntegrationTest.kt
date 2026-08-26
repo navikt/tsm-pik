@@ -1,12 +1,12 @@
 package no.nav.tsm
 
+import io.kotest.matchers.equals.shouldEqual
 import io.ktor.server.testing.ApplicationTestBuilder
 import io.ktor.server.testing.testApplication
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.util.UUID
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.toJavaDuration
 import no.nav.tsm.ktor.kafka.test.KafkaContainer
@@ -120,6 +120,6 @@ class IntegrationTest {
         val juridiskVurderingKafkaMessage =
             mapper.readValue<JuridiskVurderingKafkaMessage>(consumeFromEtterlevelseTopic())
 
-        assertEquals("1.0.0", juridiskVurderingKafkaMessage.versjon)
+        juridiskVurderingKafkaMessage.versjon shouldEqual "1.0.0"
     }
 }

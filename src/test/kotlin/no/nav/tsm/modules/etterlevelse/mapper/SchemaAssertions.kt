@@ -5,7 +5,7 @@ import com.networknt.schema.InputFormat
 import com.networknt.schema.SchemaLocation
 import com.networknt.schema.SchemaRegistry
 import com.networknt.schema.SpecificationVersion
-import kotlin.test.assertEquals
+import io.kotest.matchers.equals.shouldBeEqual
 
 internal object SchemaAssertions {
     private val schema by lazy {
@@ -21,6 +21,6 @@ internal object SchemaAssertions {
     }
 
     internal fun assertSchema(melding: String) {
-        assertEquals(emptyList<Error>(), schema.validate(melding, InputFormat.JSON))
+        schema.validate(melding, InputFormat.JSON) shouldBeEqual emptyList<Error>()
     }
 }

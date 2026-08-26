@@ -1,5 +1,6 @@
 package no.nav.tsm.modules.pik.service
 
+import io.kotest.matchers.equals.shouldEqual
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -7,7 +8,6 @@ import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.util.UUID
 import kotlin.test.Test
-import kotlin.test.assertTrue
 import no.nav.tsm.modules.etterlevelse.service.EtterlevelseProducerService
 import no.nav.tsm.modules.pik.model.JuridiskHenvisningRecord
 import no.nav.tsm.regulus.regula.juridisk.JuridiskHenvisning
@@ -71,7 +71,7 @@ class PikConsumerServiceTest {
 
         val handleRecordResult = runCatching { pikConsumerService.handleRecord(record) }
 
-        assertTrue(handleRecordResult.isSuccess)
+        handleRecordResult.isSuccess shouldEqual true
         coVerify(exactly = 2) { etterlevelseProducerService.sendToKafka(any()) }
     }
 }

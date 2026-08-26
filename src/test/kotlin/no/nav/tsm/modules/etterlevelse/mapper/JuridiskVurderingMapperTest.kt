@@ -1,11 +1,11 @@
 package no.nav.tsm.modules.etterlevelse.mapper
 
+import io.kotest.matchers.equals.shouldEqual
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.util.UUID
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import no.nav.tsm.modules.etterlevelse.model.JuridiskVurderingResult
 import no.nav.tsm.modules.etterlevelse.model.Utfall
 import no.nav.tsm.regulus.regula.juridisk.JuridiskHenvisning
@@ -51,25 +51,23 @@ class JuridiskVurderingMapperTest {
                 .first()
                 .tilJuridiskVurderingKafkaMessage(tidsstempel)
 
-        assertEquals(id, juridiskVurderingKafkaMessage.id)
-        assertEquals(tidsstempel, juridiskVurderingKafkaMessage.tidsstempel)
-        assertEquals("subsumsjon", juridiskVurderingKafkaMessage.eventName)
-        assertEquals("1.0.0", juridiskVurderingKafkaMessage.versjon)
-        assertEquals("syfosmregler", juridiskVurderingKafkaMessage.kilde)
-        assertEquals("imagenavn", juridiskVurderingKafkaMessage.versjonAvKode)
-        assertEquals("12345678910", juridiskVurderingKafkaMessage.fodselsnummer)
-        assertEquals(
-            mapOf("sykmeldingId" to listOf(sykmeldingId)),
-            juridiskVurderingKafkaMessage.sporing,
-        )
-        assertEquals("folketrygdloven", juridiskVurderingKafkaMessage.lovverk)
-        assertEquals("2022-01-01", juridiskVurderingKafkaMessage.lovverksversjon)
-        assertEquals("§8-1", juridiskVurderingKafkaMessage.paragraf)
-        assertEquals(1, juridiskVurderingKafkaMessage.ledd)
-        assertEquals(1, juridiskVurderingKafkaMessage.punktum)
-        assertEquals("a", juridiskVurderingKafkaMessage.bokstav)
-        assertEquals(mapOf("input" to "verdi"), juridiskVurderingKafkaMessage.input)
-        assertEquals(null, juridiskVurderingKafkaMessage.output)
-        assertEquals(Utfall.VILKAR_OPPFYLT, juridiskVurderingKafkaMessage.utfall)
+        juridiskVurderingKafkaMessage.id shouldEqual id
+        juridiskVurderingKafkaMessage.tidsstempel shouldEqual tidsstempel
+        juridiskVurderingKafkaMessage.eventName shouldEqual "subsumsjon"
+        juridiskVurderingKafkaMessage.versjon shouldEqual "1.0.0"
+        juridiskVurderingKafkaMessage.kilde shouldEqual "syfosmregler"
+        juridiskVurderingKafkaMessage.versjonAvKode shouldEqual "imagenavn"
+        juridiskVurderingKafkaMessage.fodselsnummer shouldEqual "12345678910"
+        juridiskVurderingKafkaMessage.sporing shouldEqual
+            mapOf("sykmeldingId" to listOf(sykmeldingId))
+        juridiskVurderingKafkaMessage.lovverk shouldEqual "folketrygdloven"
+        juridiskVurderingKafkaMessage.lovverksversjon shouldEqual "2022-01-01"
+        juridiskVurderingKafkaMessage.paragraf shouldEqual "§8-1"
+        juridiskVurderingKafkaMessage.ledd shouldEqual 1
+        juridiskVurderingKafkaMessage.punktum shouldEqual 1
+        juridiskVurderingKafkaMessage.bokstav shouldEqual "a"
+        juridiskVurderingKafkaMessage.input shouldEqual mapOf("input" to "verdi")
+        juridiskVurderingKafkaMessage.output shouldEqual null
+        juridiskVurderingKafkaMessage.utfall shouldEqual Utfall.VILKAR_OPPFYLT
     }
 }

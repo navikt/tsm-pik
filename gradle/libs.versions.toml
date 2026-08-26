@@ -10,7 +10,7 @@ tsm-juridisk = "56"
 jvmVersion = "25"
 jsonSchemaValidator = "3.0.7"
 mockk = "1.14.11"
-
+kotest = "6.2.4"
 
 [libraries]
 
@@ -25,6 +25,8 @@ tsm-juridisk = { module = "no.nav.tsm.regulus:juridisk", version.ref = "tsm-juri
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 json-schema-validator = { module = "com.networknt:json-schema-validator", version.ref = "jsonSchemaValidator"}
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+kotest = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+
 
 
 # Transitive Vulnerabilities
