@@ -2,7 +2,7 @@
 kotlin = "2.4.10"
 logback = "1.6.3"
 logbackEncoder = "9.0"
-spotless = "8.10.0"
+spotless = "8.10.1"
 jackson = "3.2.2"
 detekt = "2.0.0-alpha.6"
 ktfmt = "0.62"
