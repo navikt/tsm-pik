@@ -1,16 +1,16 @@
 [versions]
-kotlin = "2.4.10"
-logback = "1.6.3"
+kotlin = "2.4.21"
+logback = "1.6.5"
 logbackEncoder = "9.0"
 spotless = "8.10.4"
-jackson = "3.2.2"
+jackson = "3.2.4"
 detekt = "2.0.0-alpha.6"
 ktfmt = "0.62"
 tsm-juridisk = "56"
 jvmVersion = "25"
-jsonSchemaValidator = "3.0.7"
+jsonSchemaValidator = "3.0.8"
 mockk = "1.14.11"
-kotest = "6.2.4"
+kotest = "6.2.6"
 
 [libraries]
 
