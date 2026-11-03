@@ -7,28 +7,30 @@ Appliaction to synchronize legal assessments from treatment outcomes (paragraf i
 * Gradle
 
 
-## Requirements for develpoing the application
-* JDK 25
-* Docker
-* Docker Compose
-
+## Requirements for developing the application
+#### Java
 Make sure you have the Java JDK 25 installed
-  You can check which version you have installed using this command:
+You can check which version you have installed using this command:
 ``` bash
 java -version
 ```
+or install it: https://sdkman.io/
 
+#### Docker
 Make sure you have docker installed using this command:
 You can check which version you have installed using this command:
 ``` bash
 docker --version
 ```
+or install it: https://docs.docker.com/engine/install/
 
+#### Docker Compose
 Make sure you have docker compose installed using this command:
 You can check which version you have installed using this command:
 ``` bash
 docker compose version
 ```
+or install it: https://docs.docker.com/compose/install/
 
 ### Building the application
 To build the application locally and run tests you can simply run
