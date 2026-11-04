@@ -2,7 +2,7 @@ rootProject.name = "tsm-pik"
 
 
 val ktorVersion = "3.6.1"
-val tsmKtorVersion = "1.3.0"
+val tsmKtorVersion = "1.3.8"
 
 dependencyResolutionManagement {
     repositories {
